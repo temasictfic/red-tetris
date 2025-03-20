@@ -69,13 +69,15 @@ export const addPieceToBoard = (board, piece, x, y, type) => {
   
   for (let row = 0; row < piece.length; row++) {
     for (let col = 0; col < piece[row].length; col++) {
-      if (!piece[row][col]) continue;
-      
-      const boardY = y + row;
-      // If the piece is above the board, don't add it
-      if (boardY < 0) continue;
-      
-      newBoard[boardY][x + col] = type;
+      // Only add cells where the piece has a value of 1
+      if (piece[row][col]) {
+        const boardY = y + row;
+        // If the piece is above the board, don't add it
+        if (boardY < 0) continue;
+        
+        // Set the type string (not the numeric value) for the cell
+        newBoard[boardY][x + col] = type;
+      }
     }
   }
   
@@ -210,6 +212,8 @@ export const calculateDropPosition = (board, piece, x, y) => {
  */
 export const hardDrop = (board, piece, x, y, type) => {
   const dropY = calculateDropPosition(board, piece, x, y);
+  
+  // Make sure we use the string type when adding pieces to the board
   const newBoard = addPieceToBoard(board, piece, x, dropY, type);
   const { board: boardAfterClear, clearedLines } = clearLines(newBoard);
   

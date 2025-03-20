@@ -12,6 +12,7 @@ describe('Game Logic Functions', () => {
     });
   });
 
+
   describe('isValidPosition', () => {
     it('should return true for a valid position', () => {
       const board = createEmptyBoard();
@@ -74,11 +75,12 @@ describe('Game Logic Functions', () => {
       const piece = TETRIMINOS.O.shape[0];
       const newBoard = addPieceToBoard(board, piece, 4, 0, 'O');
       
-      // Check if the O piece was added correctly
-      expect(newBoard[1][4]).toBe('O');
+      // Fixed test expectations based on actual O piece shape
+      // The O piece is in positions [1,5], [1,6], [2,5], [2,6]
       expect(newBoard[1][5]).toBe('O');
-      expect(newBoard[2][4]).toBe('O');
+      expect(newBoard[1][6]).toBe('O');
       expect(newBoard[2][5]).toBe('O');
+      expect(newBoard[2][6]).toBe('O');
     });
 
     it('should not modify the original board', () => {
@@ -191,7 +193,8 @@ describe('Game Logic Functions', () => {
       
       const dropY = calculateDropPosition(board, piece, 3, 0);
       
-      // For an empty board, the I piece should drop to y=18
+      // For an empty board, the I piece should drop to appropriate position
+      // The I piece has its blocks in row 1, so it will stop at position 18
       expect(dropY).toBe(18);
     });
 
@@ -223,11 +226,12 @@ describe('Game Logic Functions', () => {
       expect(position).toEqual({ x: 3, y: 18 });
       expect(locked).toBe(true);
       
-      // Check if the piece is at the bottom of the board
-      expect(newBoard[18][3]).toBe('I');
-      expect(newBoard[18][4]).toBe('I');
-      expect(newBoard[18][5]).toBe('I');
-      expect(newBoard[18][6]).toBe('I');
+      // Check if the piece is at the bottom of the board (row 19)
+      // The I piece has its blocks in row 1 of its shape, so they'll be at row 19 of the board when dropped
+      expect(newBoard[19][3]).toBe('I');
+      expect(newBoard[19][4]).toBe('I');
+      expect(newBoard[19][5]).toBe('I');
+      expect(newBoard[19][6]).toBe('I');
     });
   });
 });
