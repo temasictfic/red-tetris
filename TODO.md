@@ -2,6 +2,7 @@
 
 ## High Priority
 - [ ] Fix game over detection - game doesn't end immediately when pieces reach the top
+- [ ] Implement automatic piece downfall
 - [ ] Fix rotation bug - when rotating pieces near the left side while moving down, pieces sometimes get stuck
 - [ ] Fix score display - player scores don't update properly and final scores don't account for penalties
 - [ ] Clarify Spectra bars - make their purpose more obvious to players
