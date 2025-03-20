@@ -10,8 +10,8 @@
     "dev:client": "vite",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "vite build",
-    "test": "jest",
-    "test:coverage": "nyc jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "node --experimental-vm-modules node_modules/.bin/nyc node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -24,17 +24,6 @@
   ],
   "author": "",
   "license": "MIT",
-  "jest": {
-    "testEnvironment": "jsdom",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/client/main.jsx",
-      "!src/server/index.js"
-    ],
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-dom"
-    ]
-  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
     "cors": "^2.8.5",
@@ -49,9 +38,14 @@
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/register": "^7.25.9",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-react": "^7.37.4",
